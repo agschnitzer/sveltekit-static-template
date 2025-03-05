@@ -6,6 +6,7 @@
  * @interface Page
  * @property {string} id The unique identifier of the page.
  * @property {string} updatedAt The date when the page was last updated.
+ * @property {string} publishedOn The date when the page was published.
  * @property {string} slug The slug of the page.
  * @property {string} title The title of the page.
  * @property {string} description The description of the page shown in search results.
@@ -14,6 +15,7 @@
 export interface Page {
   readonly id: string
   readonly updatedAt: string
+  readonly publishedOn: string
   slug: string
   title: string
   description: string
