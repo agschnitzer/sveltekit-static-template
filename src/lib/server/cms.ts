@@ -13,7 +13,7 @@ import type { Page } from '$lib/types/entity.type'
 export const fetchPage = async (slug: string): Promise<Page> => {
   try {
     // Extract the first item from the array since the slug is unique
-    const { sys: { id, updatedAt }, fields: { title } } = (await cms.getEntries({
+    const { sys: { id, updatedAt }, fields: { title, description, url } } = (await cms.getEntries({
       content_type: 'demoPages',
       'fields.slug': slug,
     })).items[0]
@@ -23,6 +23,8 @@ export const fetchPage = async (slug: string): Promise<Page> => {
       updatedAt,
       slug,
       title: title as string,
+      description: description as string,
+      url: url as string,
     }
   } catch (error: unknown) {
     throw new Error(`Error fetching page: ${ error }`)
