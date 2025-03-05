@@ -3,6 +3,18 @@
   import { page } from '$app/state'
 
   let { children } = $props()
+
+  /**
+   * Convert a date string to a human-readable format.
+   * @since 1.0.0
+   * @version 1.0.0
+   *
+   * @param {string} date The date string to convert.
+   * @returns {string} A human-readable date string.
+   */
+  const dateToString = (date: string): string => new Date(date).toLocaleDateString('en-US', {
+    year: 'numeric', month: 'long', day: 'numeric',
+  })
 </script>
 
 <svelte:head>
@@ -22,5 +34,14 @@
   <meta property="og:url" content={page.data.url}>
   <meta name="twitter:card" content="summary_large_image">
 </svelte:head>
+
+<p class="sr-only">
+  Published
+  <time datetime={page.data.publishedOn}>{dateToString(page.data.publishedOn)}</time>
+</p>
+<p class="sr-only">
+  Last updated:
+  <time datetime={page.data.updatedAt}>{dateToString(page.data.updatedAt)}</time>
+</p>
 
 {@render children()}
