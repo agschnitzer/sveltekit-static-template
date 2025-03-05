@@ -1,1 +1,54 @@
 @import 'tailwindcss';
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Inter'), url('/fonts/Inter-Regular.woff2') format('woff2');
+    unicode-range: U+020-07F;
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: local('Inter'), url('/fonts/Inter-Medium.woff2') format('woff2');
+    unicode-range: U+020-07F;
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: local('Inter'), url('/fonts/Inter-Semibold.woff2') format('woff2');
+    unicode-range: U+020-07F;
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: local('Inter'), url('/fonts/Inter-Bold.woff2') format('woff2');
+    unicode-range: U+020-07F;
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: local('Inter'), url('/fonts/Inter-Extrabold.woff2') format('woff2');
+    unicode-range: U+020-07F;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --spacing: 0.25rem;
+
+    --font-sans: 'Inter', system-ui, sans-serif;
+}
