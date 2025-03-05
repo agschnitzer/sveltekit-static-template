@@ -4,5 +4,5 @@
   let { data }: PageProps = $props()
 </script>
 
-<h2>{data.title}</h2>
+<h2 class="font-medium">{data.title}</h2>
 <p>{data.description}</p>
