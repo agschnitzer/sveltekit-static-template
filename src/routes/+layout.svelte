@@ -1,6 +1,7 @@
 <script lang="ts">
   import '../app.css'
   import { page } from '$app/state'
+  import Link from '$lib/elements/Link.svelte'
 
   let { children } = $props()
 
@@ -34,6 +35,8 @@
   <meta property="og:url" content={page.data.url}>
   <meta name="twitter:card" content="summary_large_image">
 </svelte:head>
+
+<Link href="#content" class="focus:fixed top-4 left-4 z-50 sr-only focus:not-sr-only">Skip to content</Link>
 
 <p class="sr-only">
   Published
