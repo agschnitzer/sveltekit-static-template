@@ -36,6 +36,7 @@ export interface Page {
  * @property {string} alt The alt text of the image.
  * @property {string} format The format of the image.
  * @property {string} srcset The srcset of the image.
+ * @property {Omit<Image, 'id' | 'alt' | 'srcset'>} highRes The high-resolution image.
  */
 export interface Image {
   readonly id: string
@@ -45,4 +46,5 @@ export interface Image {
   alt: string
   format: string
   srcset: string
+  highRes: Omit<Image, 'id' | 'alt' | 'srcset' | 'highRes'>
 }
