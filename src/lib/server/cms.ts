@@ -1,7 +1,7 @@
-import { loadAsset } from '$lib/server/data'
+import { findLastUpdatedAtDate, loadAsset } from '$lib/server/data'
 import { cms, config } from '$lib/server/shared'
 import type { Page } from '$lib/types/entity.type'
-import type { Asset } from '$lib/types/shared.type'
+import type { Asset, PageRef } from '$lib/types/shared.type'
 import assert from 'node:assert'
 import { ReadableStream } from 'node:stream/web'
 import type { Asset as ContentfulAsset } from 'contentful'
@@ -46,6 +46,25 @@ export const fetchPage = async (slug: string): Promise<Page> => {
 }
 
 /**
+ * Fetches all pages with their URLs and last updated dates.
+ * @since 1.0.0
+ * @version 1.0.0
+ * @async
+ *
+ * @returns {Promise<PageRef[]>} A promise that resolves with the page URLs and their last updated dates.
+ */
+export const fetchAllPages = async (): Promise<PageRef[]> => {
+  try {
+    return (await cms.getEntries({ content_type: config.cms.contentTypeId, include: 10 })).items.map(page => ({
+      url: page.fields.url as string,
+      updatedAt: findLastUpdatedAtDate(page),
+    }))
+  } catch (error: unknown) {
+    throw new Error(`Error fetching pages\n${ error }`)
+  }
+}
+
+/**
  * Fetches all assets from the CMS.
  * @since 1.0.0
  * @version 1.0.0
@@ -53,7 +72,7 @@ export const fetchPage = async (slug: string): Promise<Page> => {
  *
  * @returns {Promise<Asset[]>} A promise that resolves with the assets.
  */
-export const fetchAssets = async (): Promise<Asset[]> => {
+export const fetchAllAssets = async (): Promise<Asset[]> => {
   try {
     const { items: assets } = await cms.getAssets({
       'metadata.tags.sys.id[in]': [config.cms.assetTag],

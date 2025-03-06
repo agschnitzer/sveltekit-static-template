@@ -34,6 +34,20 @@ export interface Config {
 }
 
 /**
+ * Represents a page reference.
+ * @since 1.0.0
+ * @version 1.0.0
+ *
+ * @interface PageRef
+ * @property {string} url The URL of the page.
+ * @property {string} updatedAt The date when the page or any of its content was last updated.
+ */
+export interface PageRef {
+  url: string
+  updatedAt: string
+}
+
+/**
  * Represents an asset.
  * @since 1.0.0
  * @version 1.0.0
