@@ -22,6 +22,7 @@ Thumbs.db
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
-# Assets
+# Static files
 src/assets
 src/lib/generated
+static/sitemap.xml

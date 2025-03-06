@@ -1,6 +1,7 @@
 import { config } from '$lib/server/shared'
 import type { Image } from '$lib/types/entity.type'
 import type { Asset, AssetImport } from '$lib/types/shared.type'
+import type { Entry, EntryField, EntrySkeletonType } from 'contentful'
 import { createWriteStream, writeFileSync } from 'node:fs'
 import { relative } from 'node:path'
 import { Readable } from 'node:stream'
@@ -66,4 +67,23 @@ export const loadAsset = async (filename: string): Promise<Omit<Image, 'id' | 'a
   } catch (error: unknown) {
     throw new Error(`Error loading asset ${ filename }\n${ error }`)
   }
+}
+
+/**
+ * Finds the date when the entry or any of its content was last updated.
+ * @since 1.0.0
+ * @version 1.0.0
+ *
+ * @param {Entry<EntrySkeletonType, undefined, any>} entry The entry to check.
+ * @returns {string} A string representing the date when the entry or any of its content was last updated.
+ */
+export const findLastUpdatedAtDate = (entry: Entry<EntrySkeletonType, undefined, any>): string => {
+  return <string>Object.values(entry.fields).reduce((result: string, field) => {
+    if (field && typeof field === 'object' && ('sys' in field || 'updatedAt' in field)) {
+      const updatedAt = findLastUpdatedAtDate(field as Entry<EntrySkeletonType, undefined, any>)
+      return result.localeCompare(updatedAt) > 0 ? result : updatedAt
+    }
+
+    return result
+  }, entry?.sys?.updatedAt ?? '')
 }
