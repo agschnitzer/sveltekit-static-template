@@ -45,3 +45,8 @@ The static directory contains essential files such as `robots.txt`, favicon imag
 ## License
 
 This project is open source and available under the [MIT License](LICENSE).
+
+## Contributing
+
+If you have any suggestions or find a bug, please create an issue or submit a pull request as needed. For more information, see the
+[contributing guidelines](CONTRIBUTING.md). I'm always happy to receive contributions and feedback to make this project better!
