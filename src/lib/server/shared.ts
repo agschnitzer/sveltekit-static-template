@@ -12,6 +12,14 @@ export const config: Config = {
   cms: {
     uri: process.env.CMS_URI!,
     key: process.env.CMS_KEY!,
+    assetSizes: {
+      default: process.env.CMS_ASSET_TYPE_DEFAULT!,
+    },
+    assetTag: process.env.CMS_ASSET_ID!,
+  },
+  assets: {
+    dir: process.env.ASSET_DIR!,
+    generatedDir: process.env.ASSET_GENERATED_DIR!,
   },
 }
 

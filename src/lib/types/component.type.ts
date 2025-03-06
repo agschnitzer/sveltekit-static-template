@@ -1,5 +1,5 @@
 import type { Snippet } from 'svelte'
-import type { HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements'
+import type { HTMLAnchorAttributes, HTMLButtonAttributes, HTMLImgAttributes } from 'svelte/elements'
 
 /**
  * Represents the base properties of a component.
@@ -21,3 +21,12 @@ export type ComponentProps = {
  * @interface LinkProps
  */
 export type LinkProps = ComponentProps & HTMLAnchorAttributes & HTMLButtonAttributes
+
+/**
+ * Represents the properties of an image component.
+ * @since 1.0.0
+ * @version 1.0.0
+ *
+ * @interface ImageProps
+ */
+export type ImageProps = HTMLImgAttributes

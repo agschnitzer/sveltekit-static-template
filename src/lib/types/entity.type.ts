@@ -11,6 +11,7 @@
  * @property {string} title The title of the page.
  * @property {string} description The description of the page shown in search results.
  * @property {string} url The URL of the page.
+ * @property {Image} image The image associated with the page used for social sharing.
  */
 export interface Page {
   readonly id: string
@@ -20,4 +21,28 @@ export interface Page {
   title: string
   description: string
   url: string
+  image: Image
+}
+
+/**
+ * Represents an image.
+ * @since 1.0.0
+ * @version 1.0.0
+ *
+ * @interface Image
+ * @property {string} src The source of the image.
+ * @property {number} width The width of the image in pixels.
+ * @property {number} height The height of the image in pixels.
+ * @property {string} alt The alt text of the image.
+ * @property {string} format The format of the image.
+ * @property {string} srcset The srcset of the image.
+ */
+export interface Image {
+  readonly id: string
+  src: string
+  width: number
+  height: number
+  alt: string
+  format: string
+  srcset: string
 }
