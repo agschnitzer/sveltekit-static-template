@@ -77,7 +77,7 @@ export const loadAsset = async (filename: string): Promise<Omit<Image, 'id' | 'a
  * @param {Entry<EntrySkeletonType, undefined, any>} entry The entry to check.
  * @returns {string} A string representing the date when the entry or any of its content was last updated.
  */
-export const findLastUpdatedAtDate = (entry: Entry<EntrySkeletonType, undefined, any>): string => {
+export const findUpdatedAtDate = (entry: Entry<EntrySkeletonType, undefined, any>): string => {
   return Object.entries(entry.fields).reduce((result: string, [key, value]) => {
     if (key === 'updatedAt') return (value as string).localeCompare(result) > 0 ? value as string : result
 
@@ -85,7 +85,7 @@ export const findLastUpdatedAtDate = (entry: Entry<EntrySkeletonType, undefined,
       const array = Array.isArray(value) ? value : [value]
 
       const updatedAt = array.reduce((result: string, item) => {
-        const updatedAt = findLastUpdatedAtDate(item as Entry<EntrySkeletonType, undefined, any>)
+        const updatedAt = findUpdatedAtDate(item as Entry<EntrySkeletonType, undefined, any>)
         return result.localeCompare(updatedAt) > 0 ? result : updatedAt
       }, '')
 

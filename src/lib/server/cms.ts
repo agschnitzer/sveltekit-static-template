@@ -1,4 +1,4 @@
-import { findLastUpdatedAtDate, loadAsset } from '$lib/server/data'
+import { findUpdatedAtDate, loadAsset } from '$lib/server/data'
 import { cms, config } from '$lib/server/shared'
 import type { Page } from '$lib/types/entity.type'
 import type { Asset, PageRef } from '$lib/types/shared.type'
@@ -18,17 +18,15 @@ import type { Asset as ContentfulAsset } from 'contentful'
 export const fetchPage = async (slug: string): Promise<Page> => {
   try {
     // Extract the first item from the array since the slug is unique
-    const { sys: { id, updatedAt }, fields: { title, description, url, publishedOn, image } } = (await cms.getEntries({
-      content_type: config.cms.contentTypeId,
-      'fields.slug': slug,
-    })).items[0]
+    const page = (await cms.getEntries({ content_type: config.cms.contentTypeId, 'fields.slug': slug })).items[0]
 
+    const { sys: { id }, fields: { title, description, url, publishedOn, image } } = page
     const { sys: { id: assetId }, fields: { title: alt, file } } = image as ContentfulAsset
     assert(file, `No file found for asset ${ assetId }`)
 
     return {
       id,
-      updatedAt,
+      updatedAt: findUpdatedAtDate(page),
       publishedOn: publishedOn as string,
       slug,
       title: title as string,
@@ -57,7 +55,7 @@ export const fetchAllPages = async (): Promise<PageRef[]> => {
   try {
     return (await cms.getEntries({ content_type: config.cms.contentTypeId, include: 10 })).items.map(page => ({
       url: page.fields.url as string,
-      updatedAt: findLastUpdatedAtDate(page),
+      updatedAt: findUpdatedAtDate(page),
     }))
   } catch (error: unknown) {
     throw new Error(`Error fetching pages\n${ error }`)
