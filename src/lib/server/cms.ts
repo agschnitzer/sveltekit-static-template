@@ -19,7 +19,7 @@ export const fetchPage = async (slug: string): Promise<Page> => {
   try {
     // Extract the first item from the array since the slug is unique
     const { sys: { id, updatedAt }, fields: { title, description, url, publishedOn, image } } = (await cms.getEntries({
-      content_type: 'demoPages',
+      content_type: config.cms.contentTypeId,
       'fields.slug': slug,
     })).items[0]
 

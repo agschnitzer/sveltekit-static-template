@@ -16,6 +16,8 @@ export interface Config {
     uri: string
     /** The key to access the contentful API. */
     key: string,
+    /** The ID of the content type for pages. */
+    contentTypeId: string
     assetSizes: {
       /** The default sizes of the responsive images. */
       default: string
