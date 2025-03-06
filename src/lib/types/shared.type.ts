@@ -55,10 +55,12 @@ export interface Asset {
  * @version 1.0.0
  *
  * @interface AssetImport
- * @property {Omit<Image, 'id' | 'alt'>} image The image object without the ID and alt text.
+ * @property {Omit<Image, 'id' | 'alt'>} image The default image object without the ID and alt text.
+ * @property {Omit<Image, 'id' | 'alt'>} highRes The high-resolution image object without the ID and alt text.
  * @property {string} srcset The srcset attribute of the image.
  */
 export interface AssetImport {
   image: Omit<Image, 'id' | 'alt'>
+  highRes: Omit<Image, 'id' | 'alt'>
   srcset: string
 }

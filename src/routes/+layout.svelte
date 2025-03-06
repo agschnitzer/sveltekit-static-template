@@ -5,6 +5,8 @@
 
   let { children } = $props()
 
+  const imageUrl = `${ page.data.url }${ page.data.image.highRes.src.substring(1) }`
+
   /**
    * Convert a date string to a human-readable format.
    * @since 1.0.0
@@ -34,6 +36,14 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content={page.data.url}>
   <meta name="twitter:card" content="summary_large_image">
+
+  <meta property="og:image" content={imageUrl}>
+  <meta property="twitter:image" content={imageUrl}>
+  <meta property="og:image:alt" content={page.data.image.alt}>
+  <meta property="twitter:image:alt" content={page.data.image.alt}>
+  <meta property="og:image:width" content={page.data.image.highRes.width.toString()}>
+  <meta property="og:image:height" content={page.data.image.highRes.height.toString()}>
+  <meta property="og:image:type" content={page.data.image.highRes.format}>
 </svelte:head>
 
 <Link href="#content" class="focus:fixed top-4 left-4 z-50 sr-only focus:not-sr-only">Skip to content</Link>

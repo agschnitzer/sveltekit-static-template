@@ -25,8 +25,9 @@ export const storeAsset = async (asset: Asset): Promise<void> => {
         `${ config.assets.generatedDir }/${ filename }.js`,
         [
           `import image from '/${ config.assets.dir }/${ filename }?w=${ sizes.shift() }&imagetools'`,
+          `import highRes from '/${ config.assets.dir }/${ filename }?w=${ sizes[sizes.length - 1] }&imagetools'`,
           `import srcset from '/${ config.assets.dir }/${ filename }?w=${ sizes.join(';') }&as=srcset&imagetools'`,
-          `export default { image, srcset }`,
+          `export default { image, highRes, srcset }`,
         ].join('\n'),
         { encoding: 'utf-8', flag: 'w+' },
     )
@@ -48,12 +49,19 @@ export const loadAsset = async (filename: string): Promise<Omit<Image, 'id' | 'a
   try {
     /** The relative path to the generated files' directory. */
     const dir = relative(import.meta.dirname, config.assets.generatedDir)
-    const { image, image: { format }, srcset } = (await import(/* @vite-ignore */`${ dir }/${ filename }.js`)).default as AssetImport
+
+    const {
+      image,
+      image: { format },
+      highRes,
+      srcset,
+    } = (await import(/* @vite-ignore */`${ dir }/${ filename }.js`)).default as AssetImport
 
     return {
       ...image,
       format: `image/${ format }`,
       srcset,
+      highRes,
     }
   } catch (error: unknown) {
     throw new Error(`Error loading asset ${ filename }\n${ error }`)
