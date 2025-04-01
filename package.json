@@ -1,6 +1,6 @@
 {
   "name": "sveltekit-static-template",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "scripts": {
     "prebuild": "npm run check && dotenvx run -f .env -- vite-node --options.transformMode.ssr='/.*/' src/lib/server/scripts/prebuild.ts",
