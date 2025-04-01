@@ -23,7 +23,7 @@ export const storeAsset = async (asset: Asset): Promise<void> => {
     Readable.fromWeb(stream).pipe(writeStream)
 
     writeFileSync(
-        `${ config.assets.generatedDir }/${ filename }.js`,
+        `src/lib/${ config.assets.generatedDir }/${ filename }.js`,
         [
           `import image from '/${ config.assets.dir }/${ filename }?w=${ sizes.shift() }&imagetools'`,
           `import highRes from '/${ config.assets.dir }/${ filename }?w=${ sizes[sizes.length - 1] }&imagetools'`,
@@ -48,15 +48,12 @@ export const storeAsset = async (asset: Asset): Promise<void> => {
  */
 export const loadAsset = async (filename: string): Promise<Omit<Image, 'id' | 'alt'>> => {
   try {
-    /** The relative path to the generated files' directory. */
-    const dir = relative(import.meta.dirname, config.assets.generatedDir)
-
     const {
       image,
       image: { format },
       highRes,
       srcset,
-    } = (await import(/* @vite-ignore */`${ dir }/${ filename }.js`)).default as AssetImport
+    } = (await import(`../${ config.assets.generatedDir }/${ filename }.js`)).default as AssetImport
 
     return {
       ...image,
