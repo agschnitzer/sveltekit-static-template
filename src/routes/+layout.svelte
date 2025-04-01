@@ -57,4 +57,4 @@
   <time datetime={page.data.updatedAt}>{dateToString(page.data.updatedAt)}</time>
 </p>
 
-{@render children()}
+<main id="content">{@render children()}</main>
